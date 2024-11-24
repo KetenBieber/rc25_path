@@ -1,0 +1,99 @@
+<!-- 通过这个文件来启动仿真以及控制器，使用环境变量的方式来切换 机器人类型 ROBOT_TYPE_1="rabbit" -->
+<!-- 使用不同的命名空间来加载不同的机器人 -->
+<launch>
+    <arg name="use_sim" default="true"/>
+    <param name="use_sim_time" value="true" />
+    <!-- 场地模型需要先于机器人的spawn -->
+    <!-- 加载gazebo场地模型 -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find rc_gazebo)/worlds/rc2025_field.world" />
+        <arg name="use_sim" value="$(arg use_sim)" />
+    </include>
+
+    <!-- 加载参数 -->
+    <!-- 定义第一个机器人并加载 -->
+    <group ns="robot1">
+        <arg name="robot_type" default="$(env ROBOT_TYPE_1)" doc="Type of robot1 [rabbit, elephant, rc_r2]" />
+        <arg name="robot_namespace" value="robot1" />
+        <include file="$(find rc_gazebo)/launch/spawn_robot.launch">
+            <arg name="robot_type" value="$(arg robot_type)" />
+            <arg name="robot_namespace" value="robot1" />
+            <arg name="base_color" value="Red" /> 
+            <arg name="x" value="-5.5" />
+            <arg name="y" value="0.2" />
+            <arg name="z" value="0.5" />
+            <arg name="yaw" value="0.0" />
+            <arg name="use_sim" value="true" />
+        </include>
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+            <param name="robot_description" command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim)" />
+            <param name="publish_frequency" type="double" value="50.0" />
+            <param name="tf_prefix" value="robot1" />
+        </node>
+    </group> 
+
+    <!-- 定义第二个机器人 -->
+    <group ns="robot2">
+        <arg name="robot_type" default="$(env ROBOT_TYPE_2)" doc="Type of robot2 [rabbit, elephant, rc_r2]" />
+        <arg name="robot_namespace" value="robot2" />
+        <include file="$(find rc_gazebo)/launch/spawn_robot.launch">
+            <arg name="robot_type" value="$(arg robot_type)" />
+            <arg name="robot_namespace" value="robot2" />
+            <arg name="base_color" value="Red" /> 
+            <arg name="x" value="-3.5" />
+            <arg name="y" value="0.2" />
+            <arg name="z" value="0.5" />
+            <arg name="yaw" value="0.0" />
+            <arg name="use_sim" value="true" />
+        </include>
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+            <param name="robot_description" command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim)" />
+            <param name="publish_frequency" type="double" value="50.0" />
+            <param name="tf_prefix" value="robot2" />
+        </node>
+    </group> 
+
+    <!-- 定义第三个机器人 -->
+    <group ns="robot3">
+        <arg name="robot_type" default="$(env ROBOT_TYPE_3)" doc="Type of robot3 [rabbit, elephant, rc_r2]" />
+        <arg name="robot_namespace" value="robot3" />
+        <include file="$(find rc_gazebo)/launch/spawn_robot.launch">
+            <arg name="robot_type" value="$(arg robot_type)" />
+            <arg name="robot_namespace" value="robot3" />
+            <arg name="base_color" value="Blue" /> 
+            <arg name="x" value="5.5" />
+            <arg name="y" value="0.2" />
+            <arg name="z" value="0.5" />
+            <arg name="yaw" value="0.0" />
+            <arg name="use_sim" value="true" />
+        </include>
+        
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+            <param name="robot_description" command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim)" />
+            <param name="publish_frequency" type="double" value="50.0" />
+            <param name="tf_prefix" value="robot3" />
+        </node>
+    </group> 
+
+    <!-- 定义第四个机器人 -->
+    <group ns="robot4">
+        <arg name="robot_type" default="$(env ROBOT_TYPE_4)" doc="Type of robot4 [rabbit, elephant, rc_r2]" />
+        <arg name="robot_namespace" value="robot4" />
+        <include file="$(find rc_gazebo)/launch/spawn_robot.launch">
+            <arg name="robot_type" value="$(arg robot_type)" />
+            <arg name="robot_namespace" value="robot4" />
+            <arg name="base_color" value="Blue" /> 
+            <arg name="x" value="3.5" />
+            <arg name="y" value="0.2" />
+            <arg name="z" value="0.5" />
+            <arg name="yaw" value="0.0" />
+            <arg name="use_sim" value="true" />
+        </include>
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+            <param name="robot_description" command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim)" />
+            <param name="publish_frequency" type="double" value="50.0" />
+            <param name="tf_prefix" value="robot4" />
+        </node>
+    </group> 
+    
+</launch>

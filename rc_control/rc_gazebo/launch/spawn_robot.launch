@@ -1,0 +1,34 @@
+<!-- spawn_robot.launch -->
+<launch>
+    <!-- load different robot_description -->
+    <arg name="robot_type" default="rabbit" />
+    <arg name="robot_namespace" default="robot1" />
+    <arg name="base_color" default="Black" />
+    <arg name="x" default="0.0" />
+    <arg name="y" default="0.0" />
+    <arg name="z" default="0.5" />
+    <arg name="yaw" default="0" />
+    <arg name="use_sim" value="true" />
+
+    <!-- 设置 robot_description 参数 -->
+    <param name="robot_description"
+        command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim) $(arg base_color)" />
+    
+    <!-- spawn_model 节点 -->
+    <node name="spawn_$(arg robot_type)" pkg="gazebo_ros" type="spawn_model" args="
+        -param robot_description 
+        -urdf 
+        -model $(arg robot_namespace)_$(arg robot_type)_robot
+        -x $(arg x) 
+        -y $(arg y)
+        -z $(arg z)
+        -Y $(arg yaw)" 
+        output="screen" />
+
+    <!-- 启动 controller_manager -->
+    <include file="$(find chassis_controllers)/test/$(arg robot_type)/$(arg robot_type).launch"> 
+        <arg name="robot_type" value="$(arg robot_type)" />
+        <arg name="robot_namespace" value="$(arg robot_namespace)" />
+        <arg name="use_sim" value="$(arg use_sim)" />
+    </include>
+</launch>

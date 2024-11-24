@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="action">
+    <xacro:arg name="robot_namespace" default="robot1" />
+    <xacro:arg name="use_sim" default="true" />
+    <xacro:macro name="ACTION" params="connected_to action_name use_sim robot_namespace xyz:='0 0 0' rpy:='0 0 0' ">
+        <!-- action is fixed to the base link -->
+        <joint name="${action_name}_joint" type="fixed">
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <parent link="${connected_to}"/>
+            <child link="${action_name}"/>
+        </joint>
+        <!-- action link -->
+        <link name="${action_name}">
+            <inertial>
+                <mass value="0.01"/>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+            </inertial>
+            <visual>
+                <origin rpy="0 0 0" xyz="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://rc_description/meshes/common/action.stl" scale="1.0 1.0 1.0"/>
+                </geometry>
+            </visual>
+        </link>
+        <gazebo reference="${action_name}_joint">
+            <disableFixedJointLumping>true</disableFixedJointLumping>
+        </gazebo>
+
+        <gazebo>
+            <plugin name="rc_ros_control" filename="librc_action_hw_sim.so">
+                <robotNamespace>$(arg robot_namespace)</robotNamespace>
+                <robotSimType>rc_gazebo/RcRobotHWSim</robotSimType>
+                <publish_tf>false</publish_tf>
+            </plugin>
+        </gazebo>
+    </xacro:macro>
+</robot>

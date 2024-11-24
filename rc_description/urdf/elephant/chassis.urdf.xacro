@@ -1,0 +1,60 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="chassis">
+
+    <xacro:include filename="$(find rc_description)/urdf/common/swerve2_drive.urdf.xacro"/>
+    <!-- https://upload.wikimedia.org/wikipedia/commons/5/52/Wheelbase_and_Track.png -->
+    <xacro:property name="wheel_track" value="0.264"/>
+    <xacro:property name="wheel_base" value="0.45824"/>
+    <xacro:property name="wheel_offset_z" value="0.06795"/>
+
+    <xacro:macro name="chassis" params="roller_type">
+        <link name="dummy"> 
+        </link>
+        <link name="base_link">
+            <inertial>
+                        <origin xyz="7.37425463246122E-05 -0.000123176397051318 0.0100477471091437" rpy="0 0 0" />
+            <mass value="0.833994507664185" />
+            <inertia ixx="0.00932307152519877" ixy="-2.27939318866565E-05" ixz="-9.24770970109101E-17"
+                        iyy="0.00934933651884828"
+                        iyz="-6.16897734966632E-19"
+                        izz="0.018581852322429" />
+            </inertial>
+        <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://rc_description/meshes/elephant/base_link.stl" />
+        </geometry>
+        <material name="">
+            <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+        </visual>
+        <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://rc_description/meshes/elephant/base_link.stl" />
+        </geometry>
+        </collision>
+        </link>
+
+        <joint name="dummy_joint" type="fixed">
+            <parent link="dummy"/>
+            <child link="base_link"/>
+        </joint>
+
+        <xacro:swerve2_drive prefix="front" connected_to="base_link"
+                            x_offset="0.26447" y_offset="-0.00018277"
+                            z_offset="${wheel_offset_z}"/>
+        <xacro:swerve2_drive prefix="right" connected_to="base_link"
+                            x_offset="${-wheel_track/2}" y_offset="${-wheel_base/2}"
+                            z_offset="${wheel_offset_z}"/>
+        <xacro:swerve2_drive prefix="left" connected_to="base_link"
+                            x_offset="${-wheel_track/2}" y_offset="${wheel_base/2}"
+                            z_offset="${wheel_offset_z}"/>
+        <!-- 设置电机关节减速比 -->
+        <xacro:swerve_transmission prefix="front" wheel_reduction="-13.733" pivot_offset="3.0629664"/>
+        <xacro:swerve_transmission prefix="right" wheel_reduction="-13.733" pivot_offset="6.26861044"/>
+        <xacro:swerve_transmission prefix="left" wheel_reduction="-13.733" pivot_offset="5.276003"/>
+
+    </xacro:macro>
+
+
+</robot>

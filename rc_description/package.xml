@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>rc_description</name>
+    <version>0.0.0</version>
+    <description>The rc_description package</description>
+    <maintainer email="myx@todo.todo">myx</maintainer>
+    <license>BSD</license>
+
+    <!-- buildtool_depend: dependencies of the build process -->
+    <buildtool_depend>catkin</buildtool_depend>
+    <exec_depend>xacro</exec_depend>
+  
+</package>

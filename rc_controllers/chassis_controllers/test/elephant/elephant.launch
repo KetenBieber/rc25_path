@@ -1,0 +1,20 @@
+<launch>
+    <arg name="robot_type" default="rabbit" />
+    <arg name="robot_namespace" default="robot1" />
+
+
+    <rosparam file="$(find rc_gazebo)/config/actions.yaml" command="load" if="true" namespace="$(arg robot_namespace)"/>
+    <rosparam file="$(find chassis_controllers)/test/$(arg robot_type)/$(arg robot_type).yaml" command="load" />
+
+    <!-- 加载舵轮底盘控制器、关节状态观测器、action定位模块控制器 -->
+    <node name="controller_spawner" pkg="controller_manager" type="controller_manager" output="screen" namespace="$(arg robot_namespace)"
+          args="spawn
+          controllers/joint_state_controller
+          controllers/chassis_controller
+          controllers/action_controller"
+    />
+    <!-- 加载机器人状态观测器 -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" namespace="$(arg robot_namespace)"/>
+    </node>
+</launch>

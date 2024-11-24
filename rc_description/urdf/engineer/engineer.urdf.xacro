@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="engineer">
+    <!--    ref:https://github.com/rm-controls-->
+    <xacro:arg name="load_chassis" default="true"/>
+    <xacro:arg name="load_radar" default="true"/>
+    <xacro:arg name="load_action" default="true"/>
+    <xacro:arg name="load_arm" default="false"/>
+    <xacro:arg name="use_sim" default="false"/>
+
+    <xacro:if value="$(arg load_chassis)">
+        <xacro:include filename="$(find rc_description)/urdf/engineer/chassis.urdf.xacro"/>
+        <xacro:chassis/>
+    </xacro:if>
+
+    <xacro:if value="$(arg load_radar)">
+        <xacro:include filename="$(find rc_description)/urdf/common/radar.urdf.xacro"/>
+        <xacro:RADAR connected_to="base_link" radar_name="radar" use_sim="$(arg use_sim)"
+                     xyz="0.0 0.0 0.35"
+                     rpy="0.0 0.0 0.0"/>
+    </xacro:if>
+
+    <xacro:if value="$(arg load_action)">
+        <xacro:include filename="$(find rc_description)/urdf/common/action.urdf.xacro"/>
+        <xacro:ACTION connected_to="base_link" action_name="location_action" use_sim="$(arg use_sim)"
+                      xyz="0.0 0.0 0.0"
+                      rpy="0.0 0.0 0.0"/>
+    </xacro:if>
+
+    <!--    <xacro:if value="$(arg use_sim)">-->
+    <!--        <gazebo>-->
+    <!--            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">-->
+    <!--                <robotNamespace>/</robotNamespace>-->
+    <!--            </plugin>-->
+    <!--        </gazebo>-->
+    <!--    </xacro:if>-->
+
+    <!--    <xacro:if value="$(arg use_sim)">-->
+    <!--        <gazebo>-->
+    <!--            <plugin name="rm_ros_control" filename="librm_robot_hw_sim.so">-->
+    <!--                <robotNamespace>/</robotNamespace>-->
+    <!--                <robotSimType>rm_gazebo/RmRobotHWSim</robotSimType>-->
+    <!--            </plugin>-->
+    <!--        </gazebo>-->
+    <!--    </xacro:if>-->
+
+    <xacro:if value="$(arg load_arm)">
+        <xacro:include filename="$(find rc_description)/urdf/engineer/arm.urdf.xacro"/>
+        <xacro:arm connected_to="base_link" simulation="$(arg use_simulation)"/>
+        <xacro:include filename="$(find rc_description)/urdf/engineer/arm.transmission.xacro"/>
+        <xacro:arm_transmission simulation="$(arg use_simulation)"/>
+    </xacro:if>
+
+</robot>

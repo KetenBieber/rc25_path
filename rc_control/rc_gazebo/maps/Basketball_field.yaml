@@ -1,0 +1,6 @@
+image: Basketball_field.pgm
+resolution: 0.02771          # 每个像素代表的实际距离（米）
+origin: [-7.5, -4.0, 0.0]      # 地图原点在世界坐标系中的位置，格式为 [x, y, yaw]
+occupied_thresh: 0.2        # 占据栅格的阈值
+free_thresh: 0.1         # 空闲栅格的阈值
+negate: 0                    # 是否反转栅格地图的颜色 0 不翻转 1 翻转

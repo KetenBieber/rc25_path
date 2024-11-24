@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="radar">
+    <xacro:include filename="inertia_utils.urdf.xacro"/>
+    <xacro:macro name="RADAR" params="connected_to radar_name use_sim xyz:='0 0 0' rpy:='0 0 0' ">
+        <!-- Radar is fixed to the base link -->
+        <joint name="${radar_name}_joint" type="fixed">
+            <origin xyz="${xyz}" rpy="${rpy}"/>
+            <parent link="${connected_to}"/>
+            <child link="${radar_name}_link"/>
+        </joint>
+        <!-- Radar link -->
+        <link name="${radar_name}_link">
+            <xacro:cylinder_inertial_matrix m="0.1" r="0.03" h="0.05"/>
+            <visual>
+                <geometry>
+                    <cylinder radius="0.03" length="0.05"/>
+                </geometry>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.03" length="0.03"/>
+                </geometry>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            </collision>
+            <material name="orange">
+                <color rgba="255 108 10 255"/>
+            </material>
+        </link>
+        <gazebo reference="${radar_name}">
+            <material>Gazebo/Orange</material>
+        </gazebo>
+        <gazebo reference="${radar_name}_joint">
+            <disableFixedJointLumping>true</disableFixedJointLumping>
+        </gazebo>
+
+        <xacro:if value="$(arg use_sim)">
+            <!-- radar sim plugin -->
+            <gazebo reference="${radar_name}_link">
+                <material>Gazebo/FlatBlack</material>
+                <sensor type="ray" name="rplidar">
+                    <pose>0 0 0 0 0 0</pose>
+                    <visualize>true</visualize>
+                    <update_rate>50</update_rate>
+                    <ray>
+                        <scan>
+                            <horizontal>
+                                <samples>360</samples>
+                                <resolution>1</resolution>
+                                <min_angle>-2.35619445</min_angle>
+                                <max_angle>2.35619445</max_angle>
+                            </horizontal>
+                        </scan>
+                        <range>
+                            <min>0.260</min>
+                            <max>7.5</max>
+                            <resolution>0.015</resolution>
+                        </range>
+                        <noise>
+                            <type>gaussian</type>
+                            <mean>0.0</mean>
+                            <stddev>0.01</stddev>
+                        </noise>
+                    </ray>
+                    <plugin name="gazebo_rplidar" filename="libgazebo_ros_laser.so">
+                        <robotNamespace>/</robotNamespace>
+                        <topicName>/scan</topicName>
+                        <frameName>radar_link</frameName>
+                    </plugin>
+                </sensor>
+            </gazebo>
+        </xacro:if>
+    </xacro:macro>
+
+</robot>

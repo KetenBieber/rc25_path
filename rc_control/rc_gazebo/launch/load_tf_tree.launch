@@ -1,0 +1,20 @@
+<launch>
+    <!-- 绑定场地到 odom -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="field_to_odom" args="0 0 0 0 0 0 odom Basketball_Field/base_footprint" />
+  
+    <!-- 机器人1 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="robot1_tf_pub" args="-5.5 0.2 0 0 0 0 /odom /robot1/base_footprint" namespace="robot1" />
+      <!-- 其他 robot1 的节点 -->
+  
+    <!-- 机器人2 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="robot2_tf_pub" args="-3.5 0.2 0 0 0 0 /odom /robot2/base_link" namespace="robot2" />
+      <!-- 其他 robot2 的节点 -->
+  
+    <!-- 机器人3 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="robot3_tf_pub" args="5.5 0.2 0 0 0 0 /odom /robot3/base_footprint" namespace="robot3" />
+      <!-- 其他 robot3 的节点 -->
+  
+    <!-- 机器人4 -->
+      <node pkg="tf2_ros" type="static_transform_publisher" name="robot4_tf_pub" args="3.5 0.2 0 0 0 0 /odom /robot4/base_link" namespace="robot4"/>
+      <!-- 其他 robot4 的节点 -->
+  </launch>

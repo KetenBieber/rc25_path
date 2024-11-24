@@ -1,0 +1,24 @@
+<launch>
+    <arg name="robot_type" default="rabbit" />
+    <arg name="robot_namespace" default="robot1" />
+
+    <rosparam param="robot_namespace" value="$(arg robot_namespace)" />
+    <rosparam file="$(find rc_gazebo)/config/actions.yaml" command="load" if="true" namespace="$(arg robot_namespace)"/>
+    <rosparam file="$(find chassis_controllers)/test/$(arg robot_type)/$(arg robot_type).yaml" command="load" />
+
+    <node name="controller_spawner" pkg="controller_manager" type="controller_manager" output="screen" namespace="$(arg robot_namespace)"
+        args="spawn
+        chassis_controller
+        action_controller
+        joint_state_controller">
+    <!-- <param name="robot_namespace" value="$(arg robot_namespace)" /> -->
+    <!-- <rosparam file="$(find chassis_controllers)/test/rc_r2/rc_r2.yaml" /> -->
+    </node>
+    <!-- 加载机器人状态观测器 -->
+ <!-- 在命名空间下加载 robot_state_publisher -->
+    <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="robot_description" command="$(find xacro)/xacro '$(find rc_description)/urdf/rabbit/rabbit.urdf.xacro'"/>
+        <param name="publish_frequency" type="double" value="50.0" />
+        <param name="frame_prefix" value="$(arg robot_namespace)_"/>
+    </node> -->
+</launch>

@@ -1,0 +1,26 @@
+<launch>
+    <arg name="robot_type" default="$(env ROBOT_TYPE)" doc="Robot type [standard, hero, engineer]"/>
+    <arg name="load_chassis" default="true"/>
+    <arg name="load_gimbal" default="false"/>
+    <arg name="load_shooter" default="true"/>
+    <arg name="load_arm" default="false"/>
+    <arg name="roller_type" default="simple" doc="simple or realistic"/>
+
+
+    <rosparam file="$(find rc_gazebo)/config/actions.yaml" command="load"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(find rc_description)/urdf/$(arg robot_type)/$(arg robot_type).urdf.xacro
+         load_chassis:=$(arg load_chassis) load_gimbal:=$(arg load_gimbal) load_shooter:=$(arg load_shooter)
+         load_arm:=$(arg load_arm)
+         use_sim:=true roller_type:=$(arg roller_type)"/>
+
+
+    <!-- send fake joint values -->
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+        <param name="use_gui" value="true"/>
+    </node>
+
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find rc_description)/config/check_joint_rviz.rviz"/>
+
+</launch>
