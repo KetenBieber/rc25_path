@@ -10,3 +10,15 @@ git clone 本项目
 rc_control 是基本的机器人组成文件
 rc_controller 是控制器文件
 rc_description 主要是存放了机器人的urdf文件
+
+```shell
+cd src/
+git clone git@github.com:KetenBieber/rc25_description.git
+cd ..
+rosdepc install --from-paths . --ignore-src
+catkin build
+mon launch rc_gazebo rc2025_gazebo.launch
+mon launch load_tf_tree.launch
+mon launch load_basketball_field_map.launch
+
+```
