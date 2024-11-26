@@ -1,0 +1,37 @@
+<!-- 启动tf广播器，注意传入关键参数！ -->
+<launch>
+
+  <!-- 导入config中的参数，pub.yaml sub.yaml tf_relation.yaml -->
+  <rosparam file="$(find tf_broadcast)/config/pub.yaml" command="load" />
+  <rosparam file="$(find tf_broadcast)/config/sub.yaml" command="load" />
+  <rosparam file="$(find tf_broadcast)/config/tf_relation.yaml" command="load" />
+
+  <!-- 加载 robot1 的 tf_broadcaster Nodelet 实例 -->
+  <node pkg="nodelet" type="nodelet" name="tf_broadcaster_robot1" args="load tf_broadcast::tf_broadcaster nodelet_manager" output="screen">
+    <param name="sub_ns" value="/Robot1Action" />
+    <param name="pub_ns" value="/Robot1Odometry" />
+    <param name="tf_ns" value="/tfRobot1" />
+  </node>
+
+  <!-- 加载 robot2 的 tf_broadcaster Nodelet 实例 -->
+  <node pkg="nodelet" type="nodelet" name="tf_broadcaster_robot2" args="load tf_broadcast::tf_broadcaster nodelet_manager" output="screen">
+    <param name="sub_ns" value="/Robot2Action" />
+    <param name="pub_ns" value="/Robot2Odometry" />
+    <param name="tf_ns" value="/tfRobot2" />
+  </node>
+
+  <!-- 加载 robot3 的 tf_broadcaster Nodelet 实例 -->
+  <node pkg="nodelet" type="nodelet" name="tf_broadcaster_robot3" args="load tf_broadcast::tf_broadcaster nodelet_manager" output="screen">
+    <param name="sub_ns" value="/Robot3Action" />
+    <param name="pub_ns" value="/Robot3Odometry" />
+    <param name="tf_ns" value="/tfRobot3" />
+  </node>
+
+  <!-- 加载 robot4 的 tf_broadcaster Nodelet 实例 -->
+  <node pkg="nodelet" type="nodelet" name="tf_broadcaster_robot4" args="load tf_broadcast::tf_broadcaster nodelet_manager" output="screen">
+    <param name="sub_ns" value="/Robot4Action" />
+    <param name="pub_ns" value="/Robot4Odometry" />
+    <param name="tf_ns" value="/tfRobot4" />
+  </node>
+
+</launch>

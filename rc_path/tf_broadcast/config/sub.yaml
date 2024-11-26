@@ -1,0 +1,13 @@
+# a parameter yaml to get the sub info
+Robot1Action:
+  topic_name: /robot1/location_action_odom
+  queue_size: 1000
+Robot2Action:
+  topic_name: /robot2/location_action_odom
+  queue_size: 1000
+Robot3Action:
+  topic_name: /robot3/location_action_odom
+  queue_size: 1000
+Robot4Action:
+  topic_name: /robot4/location_action_odom
+  queue_size: 1000

@@ -1,0 +1,4 @@
+<launch>
+  <!-- 设定底盘控制器加速度 -->
+  <node pkg="nodelet" type="nodelet" name="sim_bringup" args="load sim_bringup/sim_bringup nodelet_manager" output="screen"></node>
+</launch>

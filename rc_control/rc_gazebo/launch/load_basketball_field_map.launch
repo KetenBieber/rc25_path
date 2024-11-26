@@ -6,6 +6,6 @@
     <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_odom" args="0.0, 0.0, 0.0 0 0 0 map odom" />
 
     <!-- 启动 RViz -->
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rc_gazebo)/config/rc25.rviz"/>
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find rc_gazebo)/config/rc2025.rviz"/>
 
 </launch>

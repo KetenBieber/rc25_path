@@ -1,0 +1,6 @@
+# 航模遥控设备
+
+air_device1: /robot1/ibus_data
+air_device2: /robot2/ibus_data
+air_device3: /robot3/ibus_data
+air_device4: /robot4/ibus_data

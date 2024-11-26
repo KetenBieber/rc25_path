@@ -14,5 +14,10 @@
     <depend>roslint</depend>
 
     <depend>rc_common</depend>
+    <depend>nodelet</depend>
+    <export>
+        <!-- Other tools can request additional information be placed here -->
+        <nodelet plugin="${prefix}/nodelet_rc_ibus.xml"/>
+    </export>  
   
 </package>

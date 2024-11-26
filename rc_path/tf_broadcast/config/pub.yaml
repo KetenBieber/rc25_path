@@ -1,0 +1,17 @@
+# a parameter yaml to get the sub info
+Robot1Odometry:
+  topic_name: robot1/Odom
+  queue_size: 1000
+  frequency: 10
+Robot2Odometry:
+  topic_name: robot2/Odom
+  queue_size: 1000
+  frequency: 10
+Robot3Odometry:
+  topic_name: robot3/Odom
+  queue_size: 1000
+  frequency: 10
+Robot4Odometry:
+  topic_name: robot4/Odom
+  queue_size: 1000
+  frequency: 10

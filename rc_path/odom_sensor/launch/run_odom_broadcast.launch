@@ -1,0 +1,30 @@
+<launch>
+  <!-- 发布第一个机器人的odom信息 -->
+  <node pkg="nodelet" type="nodelet" name="robot1_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot1" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot1/location_action" />
+  </node>
+
+  <!-- 发布第二个机器人的odom信息 -->
+  <node pkg="nodelet" type="nodelet" name="robot2_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot2" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot2/location_action" />
+  </node>
+
+  <!-- 发布第三个机器人的odom信息 -->
+  <node pkg="nodelet" type="nodelet" name="robot3_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot3" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot3/location_action" />
+  </node>
+
+  <!-- 发布第四个机器人的odom信息 -->
+  <node pkg="nodelet" type="nodelet" name="robot4_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot4" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot4/location_action" />
+  </node>
+
+</launch>

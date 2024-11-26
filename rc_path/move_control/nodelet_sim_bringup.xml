@@ -1,0 +1,7 @@
+<library path="lib/libnodelet_sim_bringup">
+    <class name="sim_bringup/sim_bringup" type="sim_bringup::sim_bringup" base_class_type="nodelet::Nodelet">
+      <description> 
+        A node to add a value and republish.
+      </description>
+    </class>
+</library>

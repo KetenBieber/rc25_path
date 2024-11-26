@@ -1,0 +1,44 @@
+<!-- file for air_joy_control -->
+<launch>
+
+    <!-- 设置参数 -->
+    <arg name="if_more_air_device" default="true"/>
+
+    <!-- 载入参数 -->
+    <rosparam file="$(find air_joy_control)/config/sub.yaml" command="load" /> 
+    <rosparam file="$(find air_joy_control)/config/pub.yaml" command="load" />
+    <rosparam file="$(find air_joy_control)/config/air_device.yaml" command="load" />
+    <!-- 在这里调用rc_ibus，打开端口 -->
+
+    <!-- 手柄1 -->
+    <node pkg="nodelet" type="nodelet" name="air_device1" args="load rc_ibus/IBusNode nodelet_manager" output="screen">
+        <param name="air_device" value="/robot1" />
+        <param name="serial_port" value="/dev/ttyUSB0" /> 
+    </node>
+
+  <group if="$(arg if_more_air_device)">
+    <!-- 手柄2 -->
+    <node pkg="nodelet" type="nodelet" name="air_device2" args="load rc_ibus/IBusNode nodelet_manager" output="screen">
+        <param name="air_device" value="/robot2" />
+        <param name="serial_port" value="/dev/ttyUSB1" /> 
+    </node>
+
+    <!-- 手柄3 -->
+
+  </group>
+
+  <node pkg="nodelet" type="nodelet" name="air_joy_control1" args="load air_joy::air_joy_device nodelet_manager" output="screen">
+    <param name="if_more_air_device" value="$(arg if_more_air_device)" />
+    <param name="ctrl_object" value="/robot1" />
+  </node>
+
+  <group if="$(arg if_more_air_device)">
+
+    <node pkg="nodelet" type="nodelet" name="air_joy_control2" args="load air_joy::air_joy_device nodelet_manager" output="screen">
+      <param name="if_more_air_device" value="$(arg if_more_air_device)" />
+      <param name="ctrl_object" value="/robot2" />
+    </node>
+  </group>》
+
+
+</launch>

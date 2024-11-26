@@ -1,0 +1,7 @@
+<library path="lib/libnodelet_rc_ibus">
+    <class name="rc_ibus/IBusNode" type="rc_ibus::IBusNode" base_class_type="nodelet::Nodelet">
+      <description> 
+        A node to add a value and republish.
+      </description>
+    </class>
+</library>

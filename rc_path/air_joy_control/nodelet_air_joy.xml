@@ -1,0 +1,9 @@
+<!-- nodelet plugin for air_joy -->
+<library path="lib/libnodelet_air_joy_control">
+    <class name="air_joy::air_joy_device" type="air_joy::air_joy_device" base_class_type="nodelet::Nodelet">
+      <description> 
+        A node to add a value and republish.
+      </description>
+    </class>
+</library>
+  

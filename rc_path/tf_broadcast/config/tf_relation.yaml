@@ -1,0 +1,14 @@
+# a parameter yaml to get the relation of the tf
+# 以所有车都有的关节action作为坐标发布点，更加具有通用性
+tfRobot1:
+  frame_id: odom
+  child_frame_id: robot1/location_action
+tfRobot2:
+  frame_id: odom
+  child_frame_id: robot2/location_action
+tfRobot3:
+  frame_id: odom
+  child_frame_id: robot3/location_action
+tfRobot4:
+  frame_id: odom
+  child_frame_id: robot4/location_action

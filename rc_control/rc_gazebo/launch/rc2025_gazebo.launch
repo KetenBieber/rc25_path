@@ -96,4 +96,12 @@
         </node>
     </group> 
     
+    <!-- 发布坐标关系 -->
+     <include file="$(find rc_gazebo)/launch/load_tf_tree.launch"/>
+
+     <!-- 启动rviz，并且加载栅格地图 -->
+      <include file="$(find rc_gazebo)/launch/load_basketball_field_map.launch"/>
+
+      <param name="use_sim_time" value="true" />
+
 </launch>

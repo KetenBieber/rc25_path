@@ -87,18 +87,18 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <model name='Basketball_Field'>
+    <model name='Basketball_Field_V2'>
       <link name='base_link'>
         <inertial>
-          <pose>-0 0.124435 -0 0 -0 0</pose>
-          <mass>4148.28</mass>
+          <pose>0 0.966125 -0 0 -0 0</pose>
+          <mass>477.296</mass>
           <inertia>
-            <ixx>23002</ixx>
-            <ixy>-1.9723e-10</ixy>
-            <ixz>1.68755e-05</ixz>
-            <iyy>100087</iyy>
-            <iyz>6.61908e-12</iyz>
-            <izz>77162.9</izz>
+            <ixx>2938.18</ixx>
+            <ixy>0.000112509</ixy>
+            <ixz>9.90066e-07</ixz>
+            <iyy>10305.6</iyy>
+            <iyz>-0.000127968</iyz>
+            <izz>7441.26</izz>
           </inertia>
         </inertial>
         <collision name='base_link_collision'>
@@ -106,7 +106,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/keten/rc_field/src/Basketball_Field/meshes/base_link.STL</uri>
+              <uri>/home/keten/rc_field/src/Basketball_Field_V2/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -128,7 +128,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/keten/rc_field/src/Basketball_Field/meshes/base_link.STL</uri>
+              <uri>/home/keten/rc_field/src/Basketball_Field_V2/meshes/base_link.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -139,18 +139,18 @@
       <pose>0 0 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>195 349000000</sim_time>
-      <real_time>197 122553255</real_time>
-      <wall_time>1731995146 679493648</wall_time>
-      <iterations>195349</iterations>
-      <model name='Basketball_Field'>
-        <pose>0 -0 -2.5e-05 -5e-06 4e-06 0</pose>
+      <sim_time>38 726000000</sim_time>
+      <real_time>39 231047703</real_time>
+      <wall_time>1732592579 679210856</wall_time>
+      <iterations>38726</iterations>
+      <model name='Basketball_Field_V2'>
+        <pose>0 -0 -0.030003 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
-          <pose>0 -0 -2.5e-05 -5e-06 4e-06 0</pose>
+          <pose>0 -0 -0.030003 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-2.6e-05 6e-06 -5.14213 1.18857 1.50225 3e-06</acceleration>
-          <wrench>-0.108272 0.023414 -21331 0 -0 0</wrench>
+          <acceleration>0.030053 0.003533 -6.91571 0.117554 -1.00183 0</acceleration>
+          <wrench>14.3442 1.68628 -3300.84 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -169,7 +169,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-29.9464 -13.3037 3.73667 0 -0.011484 0.439107</pose>
+        <pose>3.18255 -0.797145 19.501 1e-06 1.5178 2.10821</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

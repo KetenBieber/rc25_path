@@ -1,0 +1,31 @@
+<launch>
+  <!-- 启动 Nodelet Manager -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" />
+
+  <include file="$(find tf_broadcast)/launch/run_tf_broadcaster.launch" />
+  <include file="$(find move_control)/launch/run_sim_bringup.launch" />
+  <node pkg="nodelet" type="nodelet" name="robot1_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot1" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot1/location_action" />
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="robot2_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot2" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot2/location_action" />
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="robot3_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot3" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot3/location_action" />
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="robot4_pub_odom" args="load odom_sensor/odom_broadcast nodelet_manager" output="screen">
+    <param name="robot" value="/robot4" />
+    <param name="frame_id" value="odom" /> 
+    <param name="child_frame_id" value="robot4/location_action" />
+  </node>
+
+</launch>

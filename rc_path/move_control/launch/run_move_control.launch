@@ -1,0 +1,13 @@
+<!-- all the rc_path launch file will be launch here(maybe) -->
+<launch>
+      <!-- 启动 Nodelet 管理器 -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" />
+
+  <!-- 所有注册了插件类的包都可以在这里include，统一在这里启动 -->
+
+  <include file="$(find move_control)/launch/run_sim_bringup.launch" />
+  <include file="$(find tf_broadcast)/launch/run_tf_broadcaster.launch"/>
+  <!-- <include file="$(find air_joy_control)/launch/run_air_joy_control.launch"/> -->
+  <include file="$(find odom_sensor)/launch/run_odom_broadcast.launch" />
+  
+</launch>

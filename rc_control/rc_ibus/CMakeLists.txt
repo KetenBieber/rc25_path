@@ -4,6 +4,7 @@ project(rc_ibus)
 ## Use C++14
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ## By adding -Wall and -Werror, the compiler does not ignore warnings anymore,
 ## enforcing cleaner code.
@@ -15,6 +16,7 @@ find_package(catkin REQUIRED
         roscpp
         roslint
         rc_common
+        nodelet
         )
 
 ###################################
@@ -27,17 +29,14 @@ find_package(catkin REQUIRED
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-        INCLUDE_DIRS
-        include
+        INCLUDE_DIRS include
         ## This is only necessary because Eigen3 sets a non-standard EIGEN3_INCLUDE_DIR variable
-        CATKIN_DEPENDS
-        roscpp
-        rc_common
+        CATKIN_DEPENDS roscpp rc_common nodelet
         DEPENDS
         ## find_package(Eigen3) provides a non standard EIGEN3_INCLUDE_DIR instead of Eigen3_INCLUDE_DIRS.
         ## Therefore, the DEPEND does not work as expected and we need to add the directory to the INCLUDE_DIRS
         # Eigen3
-
+        LIBRARIES nodelet_rc_ibus 
         ## Boost is not part of the DEPENDS since it is only used in source files,
         ## Dependees do not depend on Boost when they depend on this package.
 )
@@ -46,35 +45,49 @@ catkin_package(
 ## Build ##
 ###########
 
+
+
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-        include
-        ${catkin_INCLUDE_DIRS}
+  include
+  ${catkin_INCLUDE_DIRS}
 )
 
-## Declare cpp executables
-add_executable(${PROJECT_NAME}
-        src/ibus_node.cpp
-        src/ibus.cpp
-        )
 
-## Specify libraries to link executable targets against
-target_link_libraries(${PROJECT_NAME}
-        ${catkin_LIBRARIES}
-        )
+add_library(ibus
+  src/ibus.cpp
+)
+target_link_libraries(ibus
+  ${catkin_LIBRARIES}
+)
+  
+add_library(nodelet_rc_ibus
+  src/ibus_node.cpp
+)
+target_link_libraries(nodelet_rc_ibus
+  ibus
+  ${catkin_LIBRARIES}
+)
+
+
+install(TARGETS nodelet_rc_ibus
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+
+install(FILES nodelet_rc_ibus.xml
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
 
 #############
 ## Install ##
 #############
 
 # Mark executables and/or libraries for installation
-install(
-        TARGETS ${PROJECT_NAME}
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-        RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+
 
 # Mark cpp header files for installation
 install(

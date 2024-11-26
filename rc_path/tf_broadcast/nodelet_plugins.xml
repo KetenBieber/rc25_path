@@ -1,0 +1,9 @@
+<!-- nodelet plugin for tf_broadcast -->
+<library path="lib/libnodelet_tf_broadcast">
+    <class name="tf_broadcast::tf_broadcaster" type="tf_broadcast::tf_broadcaster" base_class_type="nodelet::Nodelet">
+      <description> 
+        A node to add a value and republish.
+      </description>
+    </class>
+  </library>
+  
