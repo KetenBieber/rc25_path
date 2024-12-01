@@ -1,0 +1,7 @@
+<library path="lib/libnodelet_pid_turner">
+    <class name="pid_turner/pid_turner" type="pid_turner::pid_turner" base_class_type="nodelet::Nodelet">
+      <description> 
+        A node to add a value and republish.
+      </description>
+    </class>
+</library>

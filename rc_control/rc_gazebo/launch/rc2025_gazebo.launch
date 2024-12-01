@@ -20,10 +20,12 @@
             <arg name="robot_namespace" value="robot1" />
             <arg name="base_color" value="Red" /> 
             <arg name="x" value="-5.5" />
-            <arg name="y" value="0.2" />
+            <arg name="y" value="1.0" />
             <arg name="z" value="0.5" />
             <arg name="yaw" value="0.0" />
             <arg name="use_sim" value="true" />
+            <arg name="load_radar" value="false" />
+            <arg name="load_cube" value="true" />
         </include>
         <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
             <param name="robot_description" command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim)" />
@@ -40,11 +42,13 @@
             <arg name="robot_type" value="$(arg robot_type)" />
             <arg name="robot_namespace" value="robot2" />
             <arg name="base_color" value="Red" /> 
-            <arg name="x" value="-3.5" />
-            <arg name="y" value="0.2" />
+            <arg name="x" value="-5.5" />
+            <arg name="y" value="-1.0" />
             <arg name="z" value="0.5" />
             <arg name="yaw" value="0.0" />
             <arg name="use_sim" value="true" />
+            <arg name="load_radar" value="true" />
+            <arg name="load_cube" value="false" />
         </include>
         <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
             <param name="robot_description" command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim)" />
@@ -62,10 +66,12 @@
             <arg name="robot_namespace" value="robot3" />
             <arg name="base_color" value="Blue" /> 
             <arg name="x" value="5.5" />
-            <arg name="y" value="0.2" />
+            <arg name="y" value="1.0" />
             <arg name="z" value="0.5" />
             <arg name="yaw" value="0.0" />
             <arg name="use_sim" value="true" />
+            <arg name="load_radar" value="false" />
+            <arg name="load_cube" value="true" />
         </include>
         
         <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
@@ -83,11 +89,13 @@
             <arg name="robot_type" value="$(arg robot_type)" />
             <arg name="robot_namespace" value="robot4" />
             <arg name="base_color" value="Blue" /> 
-            <arg name="x" value="3.5" />
-            <arg name="y" value="0.2" />
+            <arg name="x" value="5.5" />
+            <arg name="y" value="-1.0" />
             <arg name="z" value="0.5" />
             <arg name="yaw" value="0.0" />
             <arg name="use_sim" value="true" />
+            <arg name="load_radar" value="false" />
+            <arg name="load_cube" value="true" />
         </include>
         <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
             <param name="robot_description" command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim)" />
@@ -98,6 +106,9 @@
     
     <!-- 发布坐标关系 -->
      <include file="$(find rc_gazebo)/launch/load_tf_tree.launch"/>
+
+    <!-- 加载move_control 组件 -->
+    <include file="$(find move_control)/launch/run_move_control.launch" />
 
      <!-- 启动rviz，并且加载栅格地图 -->
       <include file="$(find rc_gazebo)/launch/load_basketball_field_map.launch"/>

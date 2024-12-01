@@ -5,9 +5,19 @@
 
   <!-- 所有注册了插件类的包都可以在这里include，统一在这里启动 -->
 
+  
+  <!-- 仿真环境机器人初始化配置 -->
   <include file="$(find move_control)/launch/run_sim_bringup.launch" />
+
+  <!-- 仿真环境机器人TF树配置，完成自定义控制器aciton向move_base通用接口odom的转换 -->
   <include file="$(find tf_broadcast)/launch/run_tf_broadcaster.launch"/>
+
+  <!-- 航模遥控控制插件 -->
   <!-- <include file="$(find air_joy_control)/launch/run_air_joy_control.launch"/> -->
+
+  <!-- 里程计插件，完成自定义信息向move_base通用接口odometry的转换 -->
   <include file="$(find odom_sensor)/launch/run_odom_broadcast.launch" />
   
+  <!-- <include file="$(find move_control)/launch/run_velocity_transfer.launch" />  -->
+
 </launch>

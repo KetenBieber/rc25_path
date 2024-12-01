@@ -1,0 +1,22 @@
+<launch>
+
+  <!-- 启动 Nodelet Manager -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" />
+
+
+    <node pkg="nodelet" type="nodelet" name="robot1_pid_turner" args="load pid_turner/pid_turner nodelet_manager" output="screen">
+        <param name="robot" value="/Robot1Chassis" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="robot2_pid_turner" args="load pid_turner/pid_turner nodelet_manager" output="screen">
+        <param name="robot" value="/Robot2Chassis" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="robot3_pid_turner" args="load pid_turner/pid_turner nodelet_manager" output="screen">
+        <param name="robot" value="/Robot3Chassis" />
+    </node>
+
+    <node pkg="nodelet" type="nodelet" name="robot4_pid_turner" args="load pid_turner/pid_turner nodelet_manager" output="screen">
+        <param name="robot" value="/Robot4Chassis" />
+    </node>
+</launch>

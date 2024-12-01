@@ -8,11 +8,13 @@
     <arg name="y" default="0.0" />
     <arg name="z" default="0.5" />
     <arg name="yaw" default="0" />
-    <arg name="use_sim" value="true" />
+    <arg name="use_sim" default="true" />
+    <arg name="load_radar" default="false" />
+    <arg name="load_cube" default="true" />
 
     <!-- 设置 robot_description 参数 -->
     <param name="robot_description"
-        command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim) $(arg base_color)" />
+        command="$(find rc_description)/scripts/get_robot_description.sh $(arg robot_type) $(arg robot_namespace) $(arg use_sim) $(arg base_color) $(arg load_radar) $(arg load_cube)" />
     
     <!-- spawn_model 节点 -->
     <node name="spawn_$(arg robot_type)" pkg="gazebo_ros" type="spawn_model" args="

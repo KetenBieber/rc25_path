@@ -37,8 +37,6 @@ private:
 
     void topicCallback(const rc_msgs::IbusData::ConstPtr& msg);
 
-    void dataProcess();
-
     void topicChange(std::string &temp_1 , std::string &temp_2);
 
     void yawCallback(const rc_msgs::ActionData::ConstPtr& msg);

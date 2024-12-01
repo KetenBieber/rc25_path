@@ -45,8 +45,12 @@ void sim_bringup::onInit()
     ROS_INFO("robot3 accel published!");
     pub_4.publish(cmd_4);
     ROS_INFO("robot4 accel published!");
+    
+}
 
-
+bool sim_bringup::readParameters()
+{
+    
 }
 
 }

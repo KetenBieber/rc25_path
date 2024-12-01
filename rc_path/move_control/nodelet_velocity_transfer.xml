@@ -1,0 +1,7 @@
+<library path="lib/libnodelet_velocity_transfer">
+    <class name="v_transfer/v_transfer" type="v_transfer::v_transfer" base_class_type="nodelet::Nodelet">
+      <description> 
+        A node to add a value and republish.
+      </description>
+    </class>
+</library>

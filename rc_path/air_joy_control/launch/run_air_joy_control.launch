@@ -2,7 +2,7 @@
 <launch>
 
     <!-- 设置参数 -->
-    <arg name="if_more_air_device" default="true"/>
+    <arg name="if_more_air_device" default="false"/>
 
     <!-- 载入参数 -->
     <rosparam file="$(find air_joy_control)/config/sub.yaml" command="load" /> 
@@ -14,6 +14,7 @@
     <node pkg="nodelet" type="nodelet" name="air_device1" args="load rc_ibus/IBusNode nodelet_manager" output="screen">
         <param name="air_device" value="/robot1" />
         <param name="serial_port" value="/dev/ttyUSB0" /> 
+        <param name="if_more_air_device" value="$(arg if_more_air_device)" />
     </node>
 
   <group if="$(arg if_more_air_device)">

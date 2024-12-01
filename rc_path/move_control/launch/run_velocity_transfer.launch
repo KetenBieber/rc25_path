@@ -1,0 +1,12 @@
+<launch>
+  <!-- <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen" /> -->
+
+  <!-- 速度转换nodelet，按照下面的格式传入就可以完成不同坐标系下速度的转换 -->
+
+  <node pkg="nodelet" type="nodelet" name="v_transfer" args="load v_transfer/v_transfer nodelet_manager" output="screen">
+    <param name="source_frame" value="robot2/odom" />
+    <param name="target_frame" value="robot2/base_link" />
+    <param name="pub_topics" value="/robot2/cmd_vel" />
+    <param name="sub_topics" value="/cmd_vel" />
+  </node>
+</launch>

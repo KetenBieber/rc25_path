@@ -5,7 +5,7 @@
     <xacro:arg name="base_color" default="Black" />
     <xacro:include filename="$(find rc_description)/urdf/rc_r2/omni_wheel.urdf.xacro"/>
     <xacro:include filename="$(find rc_description)/urdf/common/action.urdf.xacro" />
-    <!-- <xacro:include filename="$(find urdf01_gazebo)/urdf/omni_chassis/laseer_sensor.xacro" /> -->
+    <xacro:include filename="$(find rc_description)/urdf/common/laser.xacro" />
     <xacro:property name="roller_type" value="simple" />
     <!-- https://upload.wikimedia.org/wikipedia/commons/5/52/Wheelbase_and_Track.png -->
     <xacro:property name="chassis_radius" value="0.36"/>
@@ -69,7 +69,7 @@
     </link>
 
     <xacro:ACTION connected_to="base_link" action_name="location_action" use_sim="$(arg use_sim)" robot_namespace="$(arg robot_namespace)"
-                      xyz="-0.035 0 0"
+                      xyz="0.0 0 0"
                       rpy="0.0 0.0 0.0"
                       />
 

@@ -1,0 +1,22 @@
+# 这里用来放置四台车的底盘控制器pid参数，由pid_turner包来写入，由move_control来读出并用于输出到底盘控制器
+Robot1Chassis:
+  Kp: 1.0
+  Ki: 0.0
+  Kd: 0.0
+  ref: 0.0
+Robot2Chassis:
+  Kp: 1.0
+  Ki: 0.0
+  Kd: 0.0
+  ref: 0.0
+Robot3Chassis:
+  Kp: 1.0
+  Ki: 0.0
+  Kd: 0.0
+  ref: 0.0
+Robot4Chassis:
+  Kp: 1.0
+  Ki: 0.0
+  Kd: 0.0
+  ref: 0.0
+

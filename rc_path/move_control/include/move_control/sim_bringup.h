@@ -8,7 +8,8 @@
  * @copyright Copyright (c) 2024
  * 
  * @attention :
- * @note : 一键启动底盘控制器（加速度设定话题发布），必须在设定加速度之后才可以驱动底盘控制器
+ * @note : 适用于仿真环境中一键启动底盘控制器（加速度设定话题发布），控制器设定必须在设定加速度之后才可以驱动底盘控制器
+ *        
  * @versioninfo :
  */
 #pragma once
@@ -31,6 +32,9 @@ public:
 private:
     virtual void onInit();
 
+    bool readParameters();
+
+    void spin();
 private:
 
     ros::NodeHandle nh_;

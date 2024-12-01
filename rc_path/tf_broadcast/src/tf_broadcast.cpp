@@ -33,7 +33,7 @@ void tf_broadcaster::onInit()
     loop_rate = ros::Rate(pub_frequency_);
 
     subscriber_ = nh_.subscribe(subscriberTopic_, sub_queuelength_, &tf_broadcaster::topicCallback, this);
-    current_time = ros::Time::now();
+    current_time = ros::Time::now();                                                                      
 }
 
 tf_broadcaster::tf_broadcaster()                       

@@ -28,6 +28,7 @@ private:
   rc_msgs::IbusData Ibus_cmd_;
   rc_ibus::IBus ibus_{};
 
+  bool if_use_only_one_;
   ros::Timer timer_;// 定时器
 
 public:

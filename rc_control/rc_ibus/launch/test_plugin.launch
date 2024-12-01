@@ -23,9 +23,9 @@
     <param name="ctrl_object" value="/robot1" />
   </node>
 
-    <node pkg="nodelet" type="nodelet" name="air_joy_control2" args="load air_joy::air_joy_device nodelet_manager" output="screen">
-      <param name="if_more_air_device" value="$(arg if_more_air_device)" />
-      <param name="ctrl_object" value="/robot2" />
-    </node>
+  <node pkg="nodelet" type="nodelet" name="air_joy_control2" args="load air_joy::air_joy_device nodelet_manager" output="screen">
+    <param name="if_more_air_device" value="$(arg if_more_air_device)" />
+    <param name="ctrl_object" value="/robot2" />
+  </node>
 
 </launch>

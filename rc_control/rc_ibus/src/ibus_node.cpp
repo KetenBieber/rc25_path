@@ -22,11 +22,23 @@ namespace rc_ibus
 void IBusNode::onInit()
 { 
   nh_ = getPrivateNodeHandle();
-  nh_.param<std::string>("air_device",publishTopic_,"/robot1");
-  nh_.param<std::string>("serial_port",serial_port_,"/dev/ttyUSB0");
-  ROS_INFO("set air_device to [%s]",publishTopic_.c_str());
-  ROS_INFO("set serial port to [%s]",serial_port_.c_str());
-  ibus_pub_ = nh_.advertise<rc_msgs::IbusData>(publishTopic_ + "/ibus_data",100);
+  nh_.param<bool>("if_more_air_device",if_use_only_one_,false);
+  if(if_use_only_one_ == true)
+  {
+    nh_.param<std::string>("air_device",publishTopic_,"/robot1");
+    nh_.param<std::string>("serial_port",serial_port_,"/dev/ttyUSB0");
+    ROS_INFO("set air_device to [%s]",publishTopic_.c_str());
+    ROS_INFO("set serial port to [%s]",serial_port_.c_str());
+    ibus_pub_ = nh_.advertise<rc_msgs::IbusData>(publishTopic_ + "/ibus_data",100);
+  }
+  else
+  {
+    nh_.param<std::string>("air_device",publishTopic_,"/robot1");
+    nh_.param<std::string>("serial_port",serial_port_,"/dev/ttyUSB0");
+    ROS_INFO("set air_device to [%s]",publishTopic_.c_str());
+    ROS_INFO("set serial port to [%s]",serial_port_.c_str());
+    ibus_pub_ = nh_.advertise<rc_msgs::IbusData>("/ibus_data",100);
+  }
   ibus_.init(serial_port_.data());
 
   /* 启动定时器 */

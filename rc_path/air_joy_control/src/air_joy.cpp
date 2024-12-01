@@ -57,10 +57,10 @@ void air_joy_device::onInit()
     }
     else
     {
-        publisher_ = nh_.advertise<geometry_msgs::Twist>("robot1/cmd_vel",1000);
-
+        publisher_ = nh_.advertise<geometry_msgs::Twist>("/robot1/cmd_vel",1000);
+        ROS_INFO("set the device to [%s]",ns_.c_str());
         subscriber_ = nh_.subscribe(subscriberTopic_,sub_queuelength_,&air_joy_device::topicCallback,this);
-        getYaw_ = nh_.subscribe("robot1/location_action_odom",1000,&air_joy_device::yawCallback,this);// 初始化相当于在这里写了，就是默认配置
+        getYaw_ = nh_.subscribe("/robot1/location_action_odom",1000,&air_joy_device::yawCallback,this);// 初始化相当于在这里写了，就是默认配置
         ROS_INFO("only one device will be launched!");
     }
 
@@ -118,22 +118,22 @@ void air_joy_device::topicCallback(const rc_msgs::IbusData::ConstPtr& msg)
         /* if sw_a ->up && sw_d ->up */
         if(msg->sw_a==2 && msg->sw_d==2)
         {
-            temp2_topic = "robot1/cmd_vel";
+            temp2_topic = "/robot1/cmd_vel";
             temp1_topic = "/robot1/location_action_odom";
         }
         else if(msg->sw_a==2 && msg->sw_d==1)
         {
-            temp2_topic = "robot2/cmd_vel";
+            temp2_topic = "/robot2/cmd_vel";
             temp1_topic = "/robot2/location_action_odom";
         }
         else if(msg->sw_a==1 && msg->sw_d==2)
         {
-            temp2_topic = "robot3/cmd_vel";
+            temp2_topic = "/robot3/cmd_vel";
             temp1_topic = "/robot3/location_action_odom";
         }
         else if(msg->sw_a==1 && msg->sw_d==1)
         {
-            temp2_topic = "robot4/cmd_vel";
+            temp2_topic = "/robot4/cmd_vel";
             temp1_topic = "/robot4/location_action_odom";
         }
         topicChange(temp1_topic,temp2_topic);
@@ -206,7 +206,7 @@ void air_joy_device::topicChange(std::string &temp_1 , std::string &temp_2)
 void air_joy_device::yawCallback(const rc_msgs::ActionData::ConstPtr& msg)
 {
     yaw = msg->yaw_angle;
-    ROS_INFO("receive data:[%s]::[%f]",ns_.c_str(),msg->yaw_angle);
+    // ROS_INFO("receive data:[%s]::[%f]",ns_.c_str(),msg->yaw_angle);
 }
 
 

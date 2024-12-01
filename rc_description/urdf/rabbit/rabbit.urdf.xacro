@@ -6,23 +6,54 @@
     <xacro:arg name="roller_type" default="simple"/>
     <xacro:arg name="robot_namespace" default="robot1" />
     <xacro:arg name="use_sim" default="true"/>
+    <xacro:arg name="load_cube" default="true" />
 
     <xacro:include filename="$(find rc_description)/urdf/rabbit/chassis.urdf.xacro"/>
     <xacro:chassis roller_type="$(arg roller_type)" robot_namespace="$(arg robot_namespace)"/>
 
-    <!-- <xacro:if value="$(arg load_radar)">
+    <xacro:if value="$(arg load_radar)">
         <xacro:include filename="$(find rc_description)/urdf/common/radar.urdf.xacro"/>
         <xacro:RADAR connected_to="base_link" radar_name="radar" use_sim="$(arg use_sim)"
-                     xyz="0.23897 0 0.057"
+                     xyz="0.0 0 0.1"
                      rpy="0.0 0.0 0.0"/>
-    </xacro:if> -->
+    </xacro:if>
 
     <xacro:if value="$(arg load_action)">
         <xacro:include filename="$(find rc_description)/urdf/common/action.urdf.xacro"/>
         <xacro:ACTION connected_to="base_link" action_name="location_action" use_sim="$(arg use_sim)" robot_namespace="$(arg robot_namespace)"
-                      xyz="-0.035 0 -0.06"
+                      xyz="0.0 0 -0.06"
                       rpy="0.0 0.0 0.0"/>
     </xacro:if>
+
+    <xacro:if value="$(arg load_cube)">
+        <!-- 添加圆柱体到机器人上，以便laser可以检测到 -->
+        <link name="cylinder_link">
+            <visual>
+                <geometry>
+                    <cylinder radius="0.28" length="0.1"/> <!-- 圆柱体的视觉尺寸 -->
+                </geometry>
+                <material name="red">
+                    <color rgba="1 0 0 1"/> <!-- 红色 -->
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="0.28" length="0.1"/> <!-- 圆柱体的碰撞尺寸 -->
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="1.0"/> <!-- 质量 -->
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
+            </inertial>
+        </link>
+        <joint name="cylinder_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="cylinder_link"/>
+            <origin xyz="0.0 0 0.10" rpy="0 0 0"/> <!-- 圆柱体相对于 base_link 的位置 -->
+        </joint>
+    </xacro:if>
+
 
     <gazebo>
         <plugin name="rc_ros_control" filename="librc_robot_hw_sim.so">

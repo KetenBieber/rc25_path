@@ -35,9 +35,9 @@
   <exec_depend>nodelet</exec_depend>
   <exec_depend>rc_msgs</exec_depend>
   <exec_depend>roscpp</exec_depend>
+  <exec_depend>tf2</exec_depend>
   <exec_depend>tf2_ros</exec_depend>
   <exec_depend>tf2_geometry_msgs</exec_depend>
-  <exec_depend>tf2</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
